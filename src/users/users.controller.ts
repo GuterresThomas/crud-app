@@ -15,17 +15,18 @@ export class UsersController {
     @HttpCode(201)
     async create(@Body() user: User): Promise<User> {
         const createdUser = await this.usersService.create(user);
+        console.log(user);
         return createdUser;
     }
 
     @Put(':id')
-    async update(@Param('id') id: number, @Body() user: User): Promise<any> {
+    async update(@Param('id') id: string, @Body() user: User): Promise<any> {
         await this.usersService.update(id, user);
         return { message: 'User updated successfuly' };
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: number): Promise<any>{
+    async delete(@Param('id') id: string): Promise<any>{
         const user = await this.usersService.findOne(id);
         
 
